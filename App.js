@@ -5,6 +5,8 @@ import {
   createSwitchNavigator,
   SwitchRouter,
 } from "react-navigation";
+import { Icon } from "react-native-elements";
+
 import { AppTabNavigator } from "./components/AppTabNavigator";
 
 import WelcomeScreen from "./screens/WelcomeScreen";

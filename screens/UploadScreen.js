@@ -14,79 +14,87 @@ import {
   ImageBackground,
   TextInput,
 } from "react-native";
+import db from "../config";
 import ImagePicker from "react-native-image-picker";
 import { launchImageLibrary } from "react-native-image-picker";
 export default class UploadScreen extends React.Component {
-  state = {
-    photo: null,
-  };
-  handleChoosePhoto = () => {
-    const options = {
-      noData: true,
+  constructor() {
+    super();
+    this.state = {
+      inputName: "",
+      inputPrice: "",
+      inputCategory: "",
     };
-    ImagePicker.launchImageLibrary(options, (response) => {
-      if (response.uri) {
-        this.setState({ photo: response });
-      }
+  }
+  uploadProduct = async () => {
+    // this.setState({
+    //   title: this.state.inputTitle,
+    //   author: this.state.inputAuthor,
+    //   story: this.state.inputStory,
+    // });
+    db.collection("products").add({
+      inputName: this.state.inputName,
+      inputPrice: this.state.inputPrice,
+      inputCategory: this.state.inputCategory,
     });
+    Alert.alert("Your Product Has Been Uploaded");
   };
+
   render() {
     const { photo } = this.state;
     return (
-      // <ImageBackground style={styles.bg} source={require("../assets/bg.jpeg")}>
-      //   <View>
-      //     <Text style={styles.title}>Upload a Product</Text>
+      <ImageBackground style={styles.bg} source={require("../assets/bg.jpeg")}>
+        <View>
+          <Text style={styles.title}>Upload a Product</Text>
 
-      //     <Image
-      //       source={require("../assets/camera.png")}
-      //       style={styles.imageStyle}
-      //     />
-      //     <TextInput
-      //       style={styles.inputBox2}
-      //       placeholder="Product name"
-      //       placeholderTextColor="#61C494"
-      //     />
-      //     <TextInput
-      //       style={styles.inputBox2}
-      //       placeholder="Product Price-$$"
-      //       placeholderTextColor="#61C494"
-      //     />
-      //     <TextInput
-      //       style={styles.inputBox2}
-      //       placeholder="Category"
-      //       placeholderTextColor="#61C494"
-      //     />
-      //   </View>
-      // </ImageBackground>
-      // <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      //   {photo && (
-      //     <Image
-      //       source={{ uri: photo.uri }}
-      //       style={{ width: 300, height: 300 }}
-      //     />
-      //   )}
-      //   <Button title="Choose Photo" onPress={this.handleChoosePhoto} />
-      // </View>
-      <View>
-        <Button style={styles.inputBox2} title="YO a button" />
-        <Button
-          onPress={() =>
-            ImagePicker.launchImageLibrary(
-              {
-                mediaType: "photo",
-                includeBase64: false,
-                maxHeight: 200,
-                maxWidth: 200,
-              },
-              (response) => {
-                console.log(response);
-                this.setState({ resourcePath: response });
-              }
-            )
-          }
-          title="Select Image"
-        />
-      </View>
+          <Image
+            source={require("../assets/camera.png")}
+            style={styles.imageStyle}
+          />
+          <TextInput
+            style={styles.inputBox2}
+            placeholder="Product name"
+            placeholderTextColor="#61C494"
+            onChangeText={(text) => {
+              this.setState({ inputName: text });
+            }}
+            value={this.state.inputName}
+          />
+          <TextInput
+            style={styles.inputBox2}
+            placeholder="Product Price-$$"
+            placeholderTextColor="#61C494"
+            onChangeText={(text) => {
+              this.setState({ inputPrice: text });
+            }}
+            value={this.state.inputPrice}
+          />
+          <TextInput
+            style={styles.inputBox2}
+            placeholder="Category"
+            placeholderTextColor="#61C494"
+            onChangeText={(text) => {
+              this.setState({ inputCategory: text });
+            }}
+            value={this.state.inputCategory}
+          />
+          <TouchableOpacity
+            style={styles.uploadButton}
+            onPress={async () => {
+              this.uploadProduct();
+            }}
+          >
+            <Text
+              style={{ fontSize: 40, fontWeight: "bold", color: "#1B5788" }}
+              onPress={() => {
+                this.uploadProduct();
+              }}
+            >
+              Upload
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
     );
   }
 }
@@ -131,5 +139,21 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 22,
     color: "white",
+  },
+  uploadButton: {
+    fontSize: 40,
+    fontWeight: "bold",
+    marginTop: 50,
+    marginLeft: 30,
+    width: 360,
+    color: "#61C494",
+    borderColor: "white",
+    backgroundColor: "#61C494",
+    justifyContent: "center",
+    borderWidth: 4,
+    borderRadius: 17,
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
