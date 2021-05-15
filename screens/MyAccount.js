@@ -13,22 +13,49 @@ import {
   ImageBackground,
   TextInput,
 } from "react-native";
+// import ImagePicker from "react-native-image-picker";
+// import { showImagePicker } from "react-native-image-picker";
+// const options = {
+//   title: "Select Avatar",
+//   storageOptions: {
+//     skipBackup: true,
+//     path: "images",
+//   },
+// };
+// ImagePicker.showImagePicker(options, (response) => {
+//   console.log("Response = ", response);
 
+//   if (response.didCancel) {
+//     console.log("User cancelled image picker");
+//   } else if (response.error) {
+//     console.log("ImagePicker Error: ", response.error);
+//   } else {
+//     const uri = response.uri;
+//     this.setState({
+//       selectedPictureUri: uri,
+//     });
+//   }
+// });
 export default class MyAccount extends React.Component {
   render() {
     return (
-      <View>
-        <Text style={styles.title}>My Account</Text>
-        <Image
-          source={require("../assets/camera.png")}
-          style={styles.imageStyle}
-        />
-      </View>
+      <ImageBackground style={styles.bg} source={require("../assets/bg3.jpg")}>
+        <View>
+          <Text style={styles.title}>My Account</Text>
+          <Image
+            source={require("../assets/camera.png")}
+            style={styles.imageStyle}
+          />
+        </View>
+      </ImageBackground>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  bg: {
+    flex: 1,
+  },
   title: {
     fontSize: 25,
     fontWeight: "bold",

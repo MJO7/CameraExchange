@@ -15,6 +15,7 @@ import {
   TextInput,
 } from "react-native";
 import db from "../config";
+import ViewImageScreen from "./ViewImageScreen";
 import ImagePicker from "react-native-image-picker";
 import { launchImageLibrary } from "react-native-image-picker";
 export default class UploadScreen extends React.Component {
@@ -38,6 +39,7 @@ export default class UploadScreen extends React.Component {
       inputCategory: this.state.inputCategory,
     });
     Alert.alert("Your Product Has Been Uploaded");
+    this.props.navigation.navigate("ViewImage");
   };
 
   render() {

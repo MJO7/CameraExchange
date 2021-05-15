@@ -31,7 +31,7 @@ export const AppTabNavigator = createBottomTabNavigator(
         }
       },
       tabBarOptions: {
-        activeTintColor: "green",
+        activeTintColor: "#1B5788",
         inactiveTintColor: "black",
       },
     }),

@@ -44,7 +44,7 @@ export default class ViewImageScreen extends React.Component {
         style={styles.bg}
         source={require("../assets/bgbg.jpeg")}
       >
-        <View>
+        <ScrollView>
           <Text style={styles.title}>View Products</Text>
           <Image
             source={require("../assets/camera.png")}
@@ -94,7 +94,7 @@ export default class ViewImageScreen extends React.Component {
             onEndReached={this.fetchMoreTransactions}
             onEndReachedThreshold={0.7}
           />
-        </View>
+        </ScrollView>
       </ImageBackground>
     );
   }
