@@ -6,8 +6,9 @@ import {
   SwitchRouter,
 } from "react-navigation";
 import { Icon } from "react-native-elements";
-
+import { AppDrawerNavigator } from "./components/AppDrawerNavigator";
 import { AppTabNavigator } from "./components/AppTabNavigator";
+import CustomSidebarMenu from "./components/CustomSidebarMenu";
 
 import WelcomeScreen from "./screens/WelcomeScreen";
 import ViewImageScreen from "./screens/ViewImageScreen";
@@ -18,7 +19,7 @@ export default class App extends React.Component {
 }
 const SwitchN = createSwitchNavigator({
   WelcomeScreen: { screen: WelcomeScreen },
-  BottomTab: { screen: AppTabNavigator },
+  Drawer: { screen: AppDrawerNavigator },
 });
 
 const AppContainer = createAppContainer(SwitchN);
