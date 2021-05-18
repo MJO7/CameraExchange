@@ -15,9 +15,9 @@ import {
   TextInput,
 } from "react-native";
 import db from "../config";
+import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import ViewImageScreen from "./ViewImageScreen";
 import ImagePicker from "react-native-image-picker";
-import { launchImageLibrary } from "react-native-image-picker";
 export default class UploadScreen extends React.Component {
   constructor() {
     super();
@@ -41,7 +41,12 @@ export default class UploadScreen extends React.Component {
     Alert.alert("Your Product Has Been Uploaded");
     this.props.navigation.navigate("ViewImage");
   };
-
+  handleChoosePhoto = () => {
+    const options = {};
+    ImagePicker.launchImageLibrary(options, (response) => {
+      console.log("response", response);
+    });
+  };
   render() {
     const { photo } = this.state;
     return (
@@ -95,6 +100,10 @@ export default class UploadScreen extends React.Component {
               Upload
             </Text>
           </TouchableOpacity>
+          <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          ></View>
+          <Button title="Choose Photo" onPress={this.handleChoosePhoto} />
         </View>
       </ImageBackground>
     );
